@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.zeno-cdf.org/core/v0" elementFormDefault="qualified">
+  <xs:include schemaLocation="common.xsd"/>
+
+  <xs:complexType name="metadata">
+    <xs:sequence>
+      <xs:element name="objects">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="object" type="object" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="object">
+    <xs:complexContent>
+      <xs:extension base="meta-object">
+        <xs:sequence>
+          <xs:element name="fields" type="field">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="field" type="field" minOccurs="0"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="field">
+    <xs:complexContent>
+      <xs:extension base="meta-object">
+        <xs:sequence>
+          <xs:element name="relations">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="relation" type="relation" minOccurs="0"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="constraints">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="constraint" type="constraint" minOccurs="0"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="relation">
+    <xs:complexContent>
+      <xs:extension base="meta-object">
+        <!--todo-->
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="constraint">
+    <xs:complexContent>
+      <xs:extension base="meta-object">
+        <!--todo-->
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
