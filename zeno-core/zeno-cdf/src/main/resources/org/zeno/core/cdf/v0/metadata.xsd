@@ -7,21 +7,29 @@
       <xs:element name="objects">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="object" type="object" minOccurs="0"/>
+            <xs:element name="object" type="dataObject" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="object">
+  <xs:complexType name="dataObject">
     <xs:complexContent>
-      <xs:extension base="meta-object">
+      <xs:extension base="metaObject">
         <xs:sequence>
           <xs:element name="fields" type="field">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="field" type="field" minOccurs="0"/>
+                <xs:element name="field" type="field" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+
+          <xs:element name="relations" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="relation" type="relation" minOccurs="0" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -32,19 +40,12 @@
 
   <xs:complexType name="field">
     <xs:complexContent>
-      <xs:extension base="meta-object">
+      <xs:extension base="metaObject">
         <xs:sequence>
-          <xs:element name="relations">
+          <xs:element name="constraints" minOccurs="0">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="relation" type="relation" minOccurs="0"/>
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="constraints">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="constraint" type="constraint" minOccurs="0"/>
+                <xs:element name="constraint" type="fieldConstraint" minOccurs="0" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -55,17 +56,49 @@
 
   <xs:complexType name="relation">
     <xs:complexContent>
-      <xs:extension base="meta-object">
-        <!--todo-->
+      <xs:extension base="metaObject">
+        <xs:sequence>
+          <xs:element name="key">
+            <xs:complexType>
+              <xs:attribute name="fieldName" use="required"/>
+              <xs:attribute name="relatedFieldName" use="required"/>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="type" type="relationType" use="required"/>
+        <xs:attribute name="model" type="relationModel" use="required"/>
+        <xs:attribute name="target" type="xs:string" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="constraint">
+  <xs:simpleType name="relationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="REFERENCE"/>
+      <xs:enumeration value="OWNERSHIP"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="relationModel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ONE_TO_ONE"/>
+      <xs:enumeration value="ONE_TO_MANY"/>
+      <xs:enumeration value="MANY_TO_MANY"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="fieldConstraint">
     <xs:complexContent>
-      <xs:extension base="meta-object">
-        <!--todo-->
+      <xs:extension base="metaObject">
+        <xs:attribute name="type" type="fieldConstraintType" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+
+  <xs:simpleType name="fieldConstraintType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NON_NULL"/>
+      <xs:enumeration value="UNIQUE"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

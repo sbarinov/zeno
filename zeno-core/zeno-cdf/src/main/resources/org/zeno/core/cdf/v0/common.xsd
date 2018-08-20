@@ -4,13 +4,26 @@
 
   <xs:complexType name="resource">
     <xs:complexContent>
-      <xs:extension base="meta-object"/>
+      <xs:extension base="metaObject"/>
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="meta-object">
+  <xs:complexType name="metaObject">
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="type" type="xs:string" use="required"/>
-    <xs:attribute name="version" type="xs:string" default="0"/>
+    <xs:attribute name="version" type="numericIdentifier" default="0"/>
   </xs:complexType>
+
+  <xs:simpleType name="phase">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BEFORE"/>
+      <xs:enumeration value="AFTER"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="numericIdentifier">
+    <xs:restriction base="xs:long">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

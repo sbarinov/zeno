@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.zeno.core</groupId>
     <artifactId>zeno-core</artifactId>
-    <version>1.0</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>zeno-cdf</artifactId>

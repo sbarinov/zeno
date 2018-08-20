@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.zeno-cdf.org/core/v0" elementFormDefault="qualified">
+  <xs:include schemaLocation="common.xsd"/>
+  <xs:include schemaLocation="metadata.xsd"/>
+
+  <xs:complexType name="patch">
+    <xs:complexContent>
+      <xs:extension base="resource">
+        <xs:sequence>
+          <xs:element name="hooks" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="hook" type="patchHook" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+
+          <xs:element name="changes" minOccurs="0">
+            <xs:complexType>
+              <xs:choice maxOccurs="unbounded">
+                <xs:element name="dataChange" type="dataChange"/>
+                <xs:element name="schemaChange" type="schemaChange"/>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="changeType" type="changeType" use="required"/>
+        <xs:attribute name="component" type="xs:string" use="required"/>
+        <xs:attribute name="domain" type="xs:string" use="required"/>
+        <xs:attribute name="repeatable" type="xs:boolean" default="true"/>
+        <xs:attribute name="index" type="numericIdentifier" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="patchHook">
+    <xs:sequence>
+      <xs:element name="content" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="index" type="numericIdentifier" use="required"/>
+    <xs:attribute name="phase" type="phase" use="required"/>
+  </xs:complexType>
+
+  <xs:simpleType name="changeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SCHEMA"/>
+      <xs:enumeration value="DATA"/>
+      <xs:enumeration value="MIXED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="change">
+    <xs:attribute name="index" type="numericIdentifier" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="dataChange">
+    <xs:complexContent>
+      <xs:extension base="change">
+        <xs:choice>
+          <xs:element name="create" type="recordData"/>
+          <xs:element name="update">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="criterion" type="recordSearchCriterion"/>
+                <xs:element name="record" type="recordData"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="delete" type="recordSearchCriterion"/>
+        </xs:choice>
+        <xs:attribute name="object" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="recordData">
+    <xs:sequence>
+      <xs:element name="fields">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="field" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="name" type="xs:string"/>
+                  <xs:element name="value" type="xs:anyType"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="recordSearchCriterion">
+    <xs:complexContent>
+      <xs:extension base="recordData"/>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="schemaChange">
+    <xs:complexContent>
+      <xs:extension base="change">
+        <xs:sequence>
+          <!--todo-->
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
