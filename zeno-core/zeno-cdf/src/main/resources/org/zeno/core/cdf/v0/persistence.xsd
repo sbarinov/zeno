@@ -101,9 +101,23 @@
   <xs:complexType name="schemaChange">
     <xs:complexContent>
       <xs:extension base="change">
-        <xs:sequence>
-          <!--todo-->
-        </xs:sequence>
+        <xs:choice>
+          <xs:element name="createField" type="field"/>
+          <xs:element name="updateField" type="field"/>
+          <xs:element name="deleteField">
+            <xs:complexType>
+              <xs:attribute name="name" type="xs:string"/>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="createRelation" type="relation"/>
+          <xs:element name="updateRelation" type="relation"/>
+          <xs:element name="deleteRelation">
+            <xs:complexType>
+              <xs:attribute name="name" type="xs:string"/>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+        <xs:attribute name="object" type="xs:string" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
