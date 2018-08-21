@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.zeno-cdf.org/core/v0" elementFormDefault="qualified">
-  <xs:element name="resource" type="resource"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.zeno-cdf.org/core/v0" xmlns:cdf="http://www.zeno-cdf.org/core/v0" elementFormDefault="qualified">
+  <xs:element name="resource" type="cdf:resource"/>
 
   <xs:complexType name="resource">
     <xs:complexContent>
-      <xs:extension base="metaObject"/>
+      <xs:extension base="cdf:metaObject">
+        <xs:attribute name="type" type="xs:string" use="required"/>
+      </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="metaObject">
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="type" type="xs:string" use="required"/>
-    <xs:attribute name="version" type="numericIdentifier" default="0"/>
+    <xs:attribute name="version" type="cdf:numericIdentifier" default="0"/>
   </xs:complexType>
 
   <xs:simpleType name="phase">

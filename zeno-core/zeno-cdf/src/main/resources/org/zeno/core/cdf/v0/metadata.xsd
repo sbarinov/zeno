@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.zeno-cdf.org/core/v0" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.zeno-cdf.org/core/v0" xmlns:cdf="http://www.zeno-cdf.org/core/v0" elementFormDefault="qualified">
   <xs:include schemaLocation="common.xsd"/>
 
   <xs:complexType name="metadata">
@@ -7,7 +7,7 @@
       <xs:element name="objects">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="object" type="dataObject" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="object" type="cdf:dataObject" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -16,12 +16,12 @@
 
   <xs:complexType name="dataObject">
     <xs:complexContent>
-      <xs:extension base="metaObject">
+      <xs:extension base="cdf:metaObject">
         <xs:sequence>
-          <xs:element name="fields" type="field">
+          <xs:element name="fields">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="field" type="field" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="field" type="cdf:field" minOccurs="0" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -29,34 +29,50 @@
           <xs:element name="relations" minOccurs="0">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="relation" type="relation" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="relation" type="cdf:relation" minOccurs="0" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
         </xs:sequence>
+        <xs:attribute name="type" type="cdf:objectType" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:simpleType name="objectType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TABLE"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:complexType name="field">
     <xs:complexContent>
-      <xs:extension base="metaObject">
+      <xs:extension base="cdf:metaObject">
         <xs:sequence>
           <xs:element name="constraints" minOccurs="0">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="constraint" type="fieldConstraint" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="constraint" type="cdf:fieldConstraint" minOccurs="0" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
         </xs:sequence>
+        <xs:attribute name="type" type="cdf:fieldType" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:simpleType name="fieldType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="STRING"/>
+      <xs:enumeration value="NUMERIC"/>
+      <xs:enumeration value="LOB"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:complexType name="relation">
     <xs:complexContent>
-      <xs:extension base="metaObject">
+      <xs:extension base="cdf:metaObject">
         <xs:sequence>
           <xs:element name="key">
             <xs:complexType>
@@ -65,8 +81,8 @@
             </xs:complexType>
           </xs:element>
         </xs:sequence>
-        <xs:attribute name="type" type="relationType" use="required"/>
-        <xs:attribute name="model" type="relationModel" use="required"/>
+        <xs:attribute name="type" type="cdf:relationType" use="required"/>
+        <xs:attribute name="model" type="cdf:relationModel" use="required"/>
         <xs:attribute name="target" type="xs:string" use="required"/>
       </xs:extension>
     </xs:complexContent>
@@ -89,8 +105,11 @@
 
   <xs:complexType name="fieldConstraint">
     <xs:complexContent>
-      <xs:extension base="metaObject">
-        <xs:attribute name="type" type="fieldConstraintType" use="required"/>
+      <xs:extension base="cdf:metaObject">
+        <xs:sequence>
+          <xs:element name="value" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="cdf:fieldConstraintType" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -99,6 +118,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="NON_NULL"/>
       <xs:enumeration value="UNIQUE"/>
+      <xs:enumeration value="LENGTH"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
