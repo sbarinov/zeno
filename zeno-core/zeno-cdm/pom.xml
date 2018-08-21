@@ -17,6 +17,16 @@
       <groupId>org.zeno.core</groupId>
       <artifactId>zeno-cdf</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>org.zeno.core</groupId>
+      <artifactId>zeno-eip</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
