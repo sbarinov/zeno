@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.zeno-cdf.org/core/v0" xmlns:cdf="http://www.zeno-cdf.org/core/v0" elementFormDefault="qualified">
-  <xs:element name="resource" type="cdf:resource"/>
+  <xs:element name="resource" type="cdf:Resource"/>
 
-  <xs:complexType name="resource">
+  <xs:complexType name="CdfObject"/>
+
+  <xs:complexType name="Resource">
     <xs:complexContent>
-      <xs:extension base="cdf:metaObject">
+      <xs:extension base="cdf:MetaObject">
         <xs:attribute name="type" type="xs:string" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="metaObject">
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="version" type="cdf:numericIdentifier" default="0"/>
+  <xs:complexType name="MetaObject">
+    <xs:complexContent>
+      <xs:extension base="cdf:CdfObject">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="version" type="cdf:NumericIdentifier" default="0"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
-  <xs:simpleType name="phase">
+  <xs:simpleType name="Phase">
     <xs:restriction base="xs:string">
       <xs:enumeration value="BEFORE"/>
       <xs:enumeration value="AFTER"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="numericIdentifier">
+  <xs:simpleType name="NumericIdentifier">
     <xs:restriction base="xs:long">
       <xs:minInclusive value="0"/>
     </xs:restriction>

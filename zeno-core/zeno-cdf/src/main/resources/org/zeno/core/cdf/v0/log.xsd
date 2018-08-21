@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.zeno-cdf.org/core/v0" xmlns:cdf="http://www.zeno-cdf.org/core/v0" elementFormDefault="qualified">
   <xs:include schemaLocation="common.xsd"/>
 
-  <xs:complexType name="Operation">
+  <xs:complexType name="logItem">
     <xs:complexContent>
       <xs:extension base="cdf:CdfObject">
         <xs:sequence>

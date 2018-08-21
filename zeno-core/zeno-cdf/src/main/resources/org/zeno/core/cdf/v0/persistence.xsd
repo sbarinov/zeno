@@ -3,14 +3,14 @@
   <xs:include schemaLocation="common.xsd"/>
   <xs:include schemaLocation="metadata.xsd"/>
 
-  <xs:complexType name="patch">
+  <xs:complexType name="Patch">
     <xs:complexContent>
-      <xs:extension base="cdf:resource">
+      <xs:extension base="cdf:Resource">
         <xs:sequence>
           <xs:element name="hooks" minOccurs="0">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="hook" type="cdf:patchHook" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="hook" type="cdf:PatchHook" minOccurs="0" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -18,30 +18,34 @@
           <xs:element name="changes" minOccurs="0">
             <xs:complexType>
               <xs:choice maxOccurs="unbounded">
-                <xs:element name="dataChange" type="cdf:dataChange"/>
-                <xs:element name="schemaChange" type="cdf:schemaChange"/>
+                <xs:element name="dataChange" type="cdf:DataChange"/>
+                <xs:element name="schemaChange" type="cdf:SchemaChange"/>
               </xs:choice>
             </xs:complexType>
           </xs:element>
         </xs:sequence>
-        <xs:attribute name="changeType" type="cdf:changeType" use="required"/>
+        <xs:attribute name="changeType" type="cdf:ChangeType" use="required"/>
         <xs:attribute name="component" type="xs:string" use="required"/>
         <xs:attribute name="domain" type="xs:string" use="required"/>
         <xs:attribute name="repeatable" type="xs:boolean" default="true"/>
-        <xs:attribute name="index" type="cdf:numericIdentifier" use="required"/>
+        <xs:attribute name="index" type="cdf:NumericIdentifier" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="patchHook">
-    <xs:sequence>
-      <xs:element name="content" type="xs:string"/>
-    </xs:sequence>
-    <xs:attribute name="index" type="cdf:numericIdentifier" use="required"/>
-    <xs:attribute name="phase" type="cdf:phase" use="required"/>
+  <xs:complexType name="PatchHook">
+    <xs:complexContent>
+      <xs:extension base="cdf:CdfObject">
+        <xs:sequence>
+          <xs:element name="content" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="index" type="cdf:NumericIdentifier" use="required"/>
+        <xs:attribute name="phase" type="cdf:Phase" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
-  <xs:simpleType name="changeType">
+  <xs:simpleType name="ChangeType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="SCHEMA"/>
       <xs:enumeration value="DATA"/>
@@ -49,61 +53,69 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:complexType name="change">
-    <xs:attribute name="index" type="cdf:numericIdentifier" use="required"/>
+  <xs:complexType name="Change">
+    <xs:complexContent>
+      <xs:extension base="cdf:CdfObject">
+        <xs:attribute name="index" type="cdf:NumericIdentifier" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="dataChange">
+  <xs:complexType name="DataChange">
     <xs:complexContent>
-      <xs:extension base="cdf:change">
+      <xs:extension base="cdf:Change">
         <xs:choice>
-          <xs:element name="create" type="cdf:recordData"/>
+          <xs:element name="create" type="cdf:RecordData"/>
           <xs:element name="update">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="criterion" type="cdf:recordSearchCriterion"/>
-                <xs:element name="record" type="cdf:recordData"/>
+                <xs:element name="criterion" type="cdf:RecordSearchCriterion"/>
+                <xs:element name="record" type="cdf:RecordData"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="delete" type="cdf:recordSearchCriterion"/>
+          <xs:element name="delete" type="cdf:RecordSearchCriterion"/>
         </xs:choice>
         <xs:attribute name="object" type="xs:string" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="recordData">
-    <xs:sequence>
-      <xs:element name="fields">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="field" type="cdf:field" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="recordSearchCriterion">
+  <xs:complexType name="RecordData">
     <xs:complexContent>
-      <xs:extension base="cdf:recordData"/>
+      <xs:extension base="cdf:CdfObject">
+        <xs:sequence>
+          <xs:element name="fields">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="field" type="cdf:Field" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:complexType name="schemaChange">
+  <xs:complexType name="RecordSearchCriterion">
     <xs:complexContent>
-      <xs:extension base="cdf:change">
+      <xs:extension base="cdf:RecordData"/>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SchemaChange">
+    <xs:complexContent>
+      <xs:extension base="cdf:Change">
         <xs:choice>
-          <xs:element name="createField" type="cdf:field"/>
-          <xs:element name="updateField" type="cdf:field"/>
+          <xs:element name="createField" type="cdf:Field"/>
+          <xs:element name="updateField" type="cdf:Field"/>
           <xs:element name="deleteField">
             <xs:complexType>
               <xs:attribute name="name" type="xs:string" use="required"/>
             </xs:complexType>
           </xs:element>
-          <xs:element name="createRelation" type="cdf:relation"/>
-          <xs:element name="updateRelation" type="cdf:relation"/>
+          <xs:element name="createRelation" type="cdf:Relation"/>
+          <xs:element name="updateRelation" type="cdf:Relation"/>
           <xs:element name="deleteRelation">
             <xs:complexType>
               <xs:attribute name="name" type="xs:string" use="required"/>
