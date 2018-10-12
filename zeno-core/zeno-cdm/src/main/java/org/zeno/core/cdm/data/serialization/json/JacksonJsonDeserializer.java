@@ -5,10 +5,10 @@
  */
 package org.zeno.core.cdm.data.serialization.json;
 
-import java.nio.charset.Charset;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.zeno.core.cdm.data.serialization.IDeserializer;
+
+import java.nio.charset.Charset;
 
 public class JacksonJsonDeserializer<T> implements IDeserializer<T> {
     private static final ObjectMapper DEFAULT_OBJECT_MAPPER = new ObjectMapper();
