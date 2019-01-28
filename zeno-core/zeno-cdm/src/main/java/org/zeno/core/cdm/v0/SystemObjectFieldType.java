@@ -6,12 +6,18 @@
 
 package org.zeno.core.cdm.v0;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class SystemObjectFieldType {
+public class SystemObjectFieldType implements Serializable {
+    private static final long serialVersionUID = 9149356615406885732L;
+
     private long id;
     private String name;
     private String description;
+
+    private SystemObjectFieldType() {
+    }
 
     private SystemObjectFieldType(Builder builder) {
         id = builder.id;

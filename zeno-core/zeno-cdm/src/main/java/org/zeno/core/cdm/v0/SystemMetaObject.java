@@ -6,12 +6,18 @@
 
 package org.zeno.core.cdm.v0;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class SystemMetaObject {
+public class SystemMetaObject implements Serializable {
+    private static final long serialVersionUID = 2216701569777307302L;
+
     private long id;
     private String name;
     private String description;
+
+    private SystemMetaObject() {
+    }
 
     private SystemMetaObject(Builder builder) {
         id = builder.id;

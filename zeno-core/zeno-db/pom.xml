@@ -22,6 +22,11 @@
       <groupId>org.zeno.core</groupId>
       <artifactId>zeno-persistence</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>com.oracle.jdbc</groupId>
+      <artifactId>ojdbc8</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
