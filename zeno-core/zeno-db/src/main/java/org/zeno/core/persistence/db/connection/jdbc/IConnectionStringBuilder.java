@@ -1,4 +1,4 @@
-package org.zeno.core.persistence.db.jdbc;
+package org.zeno.core.persistence.db.connection.jdbc;
 
 public interface IConnectionStringBuilder {
     String build(JdbcConnectionProfile profile);

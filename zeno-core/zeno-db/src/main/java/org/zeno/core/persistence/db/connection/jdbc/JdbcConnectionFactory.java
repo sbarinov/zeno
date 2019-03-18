@@ -1,7 +1,7 @@
-package org.zeno.core.persistence.db.jdbc;
+package org.zeno.core.persistence.db.connection.jdbc;
 
 import org.zeno.core.cdm.v0.NamePasswordCredential;
-import org.zeno.core.persistence.db.IConnectionFactory;
+import org.zeno.core.persistence.db.connection.IConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package org.zeno.core.persistence.db;
+package org.zeno.core.persistence.db.connection;
 
 import java.sql.Connection;
 

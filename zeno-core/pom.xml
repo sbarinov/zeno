@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -12,6 +14,8 @@
 
   <modules>
     <module>zeno-eip</module>
+    <module>zeno-bean</module>
+    <module>zeno-codegen</module>
     <module>zeno-cdf</module>
     <module>zeno-cdm</module>
     <module>zeno-persistence</module>
@@ -23,6 +27,12 @@
       <dependency>
         <groupId>org.zeno.core</groupId>
         <artifactId>zeno-eip</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.zeno.core</groupId>
+        <artifactId>zeno-bean</artifactId>
         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 

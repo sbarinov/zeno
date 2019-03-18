@@ -1,4 +1,4 @@
-package org.zeno.core.persistence.db.jdbc;
+package org.zeno.core.persistence.db.connection.jdbc;
 
 public enum JdbcDriver {
     ORACLE("oracle", "oracle.jdbc.driver.OracleDriver");
