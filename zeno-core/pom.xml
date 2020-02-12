@@ -1,14 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~
+  ~ COPYRIGHT_PLACEHOLDER
+  ~
+  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.zeno</groupId>
+    <groupId>domain.zeno</groupId>
     <artifactId>zeno</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>org.zeno.core</groupId>
+  <groupId>domain.zeno.core</groupId>
   <artifactId>zeno-core</artifactId>
   <packaging>pom</packaging>
 
@@ -19,43 +25,44 @@
     <module>zeno-cdf</module>
     <module>zeno-cdm</module>
     <module>zeno-persistence</module>
+    <module>zeno-meta</module>
     <module>zeno-db</module>
   </modules>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.zeno.core</groupId>
+        <groupId>domain.zeno.core</groupId>
         <artifactId>zeno-eip</artifactId>
         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
-        <groupId>org.zeno.core</groupId>
+        <groupId>domain.zeno.core</groupId>
         <artifactId>zeno-bean</artifactId>
         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
-        <groupId>org.zeno.core</groupId>
+        <groupId>domain.zeno.core</groupId>
         <artifactId>zeno-cdf</artifactId>
         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
-        <groupId>org.zeno.core</groupId>
+        <groupId>domain.zeno.core</groupId>
         <artifactId>zeno-cdm</artifactId>
         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
-        <groupId>org.zeno.core</groupId>
+        <groupId>domain.zeno.core</groupId>
         <artifactId>zeno-persistence</artifactId>
         <version>1.0.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
-        <groupId>org.zeno.core</groupId>
+        <groupId>domain.zeno.core</groupId>
         <artifactId>zeno-db</artifactId>
         <version>1.0.0-SNAPSHOT</version>
       </dependency>
@@ -64,6 +71,12 @@
         <groupId>javax.persistence</groupId>
         <artifactId>persistence-api</artifactId>
         <version>1.0.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>domain.zeno.core.ui</groupId>
+        <artifactId>zeno-ui-api</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
