@@ -57,7 +57,7 @@
             <configuration>
               <xsdOptions>
                 <xsdOption>
-                  <xsd>classpath:/org/zeno/core/cdf/v0/persistence.xsd</xsd>
+                  <xsd>classpath:/domain/zeno/core/cdf/v0/persistence.xsd</xsd>
                 </xsdOption>
               </xsdOptions>
             </configuration>
