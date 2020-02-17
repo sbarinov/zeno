@@ -5,7 +5,7 @@ package domain.zeno.core.persistence.data.jdbc.action;
  */
 
 import domain.zeno.core.persistence.data.model.GenericRecord;
-import domain.zeno.core.persistence.data.model.ValueContainer;
+import domain.zeno.core.bean.supplier.ValueContainer;
 import domain.zeno.core.persistence.generic.jdbc.IJdbcStatementBuilder;
 import domain.zeno.core.persistence.schema.model.Column;
 import domain.zeno.core.persistence.schema.model.ColumnType;

@@ -4,6 +4,7 @@ package domain.zeno.core.persistence.data.model;
  * COPYRIGHT_PLACEHOLDER
  */
 
+import domain.zeno.core.bean.supplier.ValueContainer;
 import domain.zeno.core.persistence.data.IRecord;
 
 import java.util.Collections;

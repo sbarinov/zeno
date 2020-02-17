@@ -10,4 +10,5 @@ public class MetaObject {
     private String name;
     private MetaObjectType type;
     private Collection<MetaObjectField> fields;
+    private Collection<MetaObjectRelation> relations;
 }

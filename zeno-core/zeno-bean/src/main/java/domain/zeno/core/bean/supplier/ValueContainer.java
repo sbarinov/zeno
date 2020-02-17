@@ -1,4 +1,4 @@
-package domain.zeno.core.persistence.data.model;
+package domain.zeno.core.bean.supplier;
 
 /*
  * COPYRIGHT_PLACEHOLDER

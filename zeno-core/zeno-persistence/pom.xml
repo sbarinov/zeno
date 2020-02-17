@@ -30,6 +30,11 @@
     </dependency>
 
     <dependency>
+      <groupId>domain.zeno.core</groupId>
+      <artifactId>zeno-bean</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>javax.persistence</groupId>
       <artifactId>persistence-api</artifactId>
     </dependency>

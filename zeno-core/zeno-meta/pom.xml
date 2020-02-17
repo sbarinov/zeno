@@ -31,6 +31,11 @@
 
     <dependency>
       <groupId>domain.zeno.core</groupId>
+      <artifactId>zeno-bean</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>domain.zeno.core</groupId>
       <artifactId>zeno-persistence</artifactId>
     </dependency>
 
